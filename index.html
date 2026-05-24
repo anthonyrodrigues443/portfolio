@@ -9,55 +9,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #0a0a0c;
-    --bg-2: #111114;
-    --bg-3: #161619;
-    --ink: #f5f3ed;
-    --ink-dim: #8a8782;
-    --ink-faint: #4d4a45;
-    --line: rgba(245, 243, 237, 0.10);
-    --line-strong: rgba(245, 243, 237, 0.22);
-    --cyan: #00ffd0;
-    --pink: #ff3d8a;
-    --lime: #d4ff45;
-    --orange: #ff7a45;
-    --cyan-glow: rgba(0, 255, 208, 0.4);
-    --pink-glow: rgba(255, 61, 138, 0.4);
-    --lime-glow: rgba(212, 255, 69, 0.4);
+    --bg: #ffffff;
+    --bg-2: #f7f9fc;
+    --bg-3: #eef1f7;
+    --ink: #0b1d3a;
+    --ink-dim: #5d6b88;
+    --ink-faint: #a8b1c4;
+    --line: rgba(11, 29, 58, 0.10);
+    --line-strong: rgba(11, 29, 58, 0.22);
+    --accent: #1e3a8a;
+    --accent-soft: rgba(30, 58, 138, 0.08);
     --sans: 'Inter', system-ui, sans-serif;
     --display: 'Instrument Serif', 'Times New Roman', serif;
     --mono: 'JetBrains Mono', monospace;
-
     --rail: 320px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
   body { overflow-x: hidden; }
   a { color: inherit; text-decoration: none; }
-  ::selection { background: var(--cyan); color: #003a30; }
+  ::selection { background: var(--accent); color: #fff; }
 
-  /* ---------- Ambient bg ---------- */
-  .bg-amb { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-  .bg-amb::before {
-    content: ''; position: absolute; inset: -20%;
-    background:
-      radial-gradient(circle at 20% 30%, color-mix(in oklab, var(--cyan) 14%, transparent), transparent 40%),
-      radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--pink) 16%, transparent), transparent 35%),
-      radial-gradient(circle at 60% 90%, color-mix(in oklab, var(--lime) 10%, transparent), transparent 45%);
-    filter: blur(60px); opacity: .8;
-  }
+  /* ---------- Subtle background grid only ---------- */
   .bg-grid {
-    position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .35;
+    position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .5;
     background-image:
       linear-gradient(var(--line) 1px, transparent 1px),
       linear-gradient(90deg, var(--line) 1px, transparent 1px);
     background-size: 80px 80px;
-    mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
-  }
-  .bg-grain {
-    position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: .04;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-    mix-blend-mode: overlay;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 80%);
   }
 
   /* ---------- Shell ---------- */
@@ -68,13 +48,12 @@
   }
   @media (max-width: 980px) { .shell { grid-template-columns: 1fr; } }
 
-  /* ---------- Left rail (sticky bio / nav) ---------- */
+  /* ---------- Left rail ---------- */
   .rail {
     position: sticky; top: 0; align-self: start;
     height: 100vh; padding: 32px 28px;
     border-right: 1px solid var(--line);
-    background: linear-gradient(180deg, rgba(10,10,12,.6), rgba(10,10,12,.85));
-    backdrop-filter: blur(20px);
+    background: var(--bg);
     display: flex; flex-direction: column; gap: 24px;
     overflow-y: auto;
   }
@@ -82,34 +61,32 @@
 
   .r-id { display: flex; align-items: center; gap: 14px; }
   .r-mark {
-    width: 44px; height: 44px; border-radius: 50%; position: relative; overflow: hidden;
-    background: conic-gradient(from 0deg, var(--cyan), var(--pink), var(--lime), var(--cyan));
-    animation: rot 9s linear infinite; flex-shrink: 0;
-  }
-  .r-mark::after {
-    content: 'A'; position: absolute; inset: 4px; border-radius: 50%; background: var(--bg);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: #fff; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--display); font-style: italic; font-weight: 400; color: var(--ink); font-size: 18px;
+    font-family: var(--display); font-style: italic; font-size: 22px;
   }
-  @keyframes rot { to { transform: rotate(360deg); } }
-  .r-name { font-family: var(--display); font-size: 20px; line-height: 1.1; letter-spacing: -.01em; }
-  .r-name em { font-style: italic; font-weight: 400; color: var(--ink-dim); display: block; font-size: 13px; margin-top: 2px; }
+  .r-name { font-family: var(--display); font-size: 22px; line-height: 1.1; letter-spacing: -.01em; color: var(--ink); }
+  .r-name em {
+    display: block; font-family: var(--mono); font-style: normal;
+    font-size: 10.5px; color: var(--ink-dim); letter-spacing: .14em;
+    text-transform: uppercase; margin-top: 4px;
+  }
 
   .r-status {
     padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px;
-    display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.02);
+    display: flex; align-items: center; gap: 12px;
   }
   .r-status .pulse {
-    width: 9px; height: 9px; border-radius: 50%; background: var(--lime);
-    box-shadow: 0 0 0 0 var(--lime); animation: pulse 1.8s infinite;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 0 0 var(--accent-soft); animation: pulse 1.8s infinite;
   }
   @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--lime) 60%, transparent); }
+    0% { box-shadow: 0 0 0 0 var(--accent-soft); }
     70% { box-shadow: 0 0 0 10px transparent; }
     100% { box-shadow: 0 0 0 0 transparent; }
   }
   .r-status .txt { font-family: var(--mono); font-size: 11px; color: var(--ink); letter-spacing: .04em; }
-  .r-status .txt b { color: var(--lime); font-weight: 500; }
   .r-status .txt span { display: block; color: var(--ink-faint); font-size: 10px; margin-top: 2px; letter-spacing: .12em; text-transform: uppercase; }
 
   .r-section { display: flex; flex-direction: column; gap: 8px; }
@@ -122,19 +99,13 @@
     font-family: var(--mono); font-size: 12px; color: var(--ink-dim); letter-spacing: .04em;
     transition: all .18s; border: 1px solid transparent;
   }
-  .r-nav a:hover, .r-nav a.active { color: var(--ink); background: rgba(255,255,255,.04); border-color: var(--line); }
+  .r-nav a:hover, .r-nav a.active { color: var(--ink); background: var(--accent-soft); }
   .r-nav a .num { color: var(--ink-faint); font-size: 10px; }
-  .r-nav a:hover .num { color: var(--cyan); }
 
-  .r-meta {
-    font-family: var(--mono); font-size: 11px; color: var(--ink-dim); line-height: 1.7;
-  }
+  .r-meta { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); line-height: 1.7; }
   .r-meta div { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--line); }
   .r-meta div:last-child { border-bottom: none; }
   .r-meta div b { color: var(--ink); font-weight: 500; }
-  .r-meta div .pop-c { color: var(--cyan); font-weight: 500; }
-  .r-meta div .pop-p { color: var(--pink); font-weight: 500; }
-  .r-meta div .pop-l { color: var(--lime); font-weight: 500; }
 
   .r-socials { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
   .r-soc {
@@ -143,19 +114,17 @@
     font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
     color: var(--ink-dim); transition: all .18s;
   }
-  .r-soc:hover { color: var(--bg); background: var(--ink); border-color: var(--ink); }
+  .r-soc:hover { color: #fff; background: var(--accent); border-color: var(--accent); }
 
   .r-cta {
     margin-top: auto;
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 18px; border-radius: 10px;
-    background: var(--cyan); color: #003a30;
+    background: var(--accent); color: #fff;
     font-family: var(--mono); font-size: 12px; letter-spacing: .04em;
-    box-shadow: 0 0 32px -8px var(--cyan-glow);
     transition: all .25s;
   }
-  .r-cta:hover { background: var(--pink); color: var(--bg); box-shadow: 0 0 32px -8px var(--pink-glow); }
-  .r-cta b { font-weight: 500; }
+  .r-cta:hover { background: var(--ink); }
 
   /* ---------- Main ---------- */
   .main { padding: 0 56px 80px; min-width: 0; }
@@ -178,7 +147,7 @@
     padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line);
     color: var(--ink-dim);
   }
-  .top .chip.live { color: var(--lime); border-color: color-mix(in oklab, var(--lime) 50%, transparent); }
+  .top .chip.live { color: var(--accent); border-color: color-mix(in oklab, var(--accent) 35%, transparent); }
 
   /* ---------- Hero ---------- */
   .hero { padding: 48px 0 24px; position: relative; }
@@ -189,34 +158,25 @@
     font-family: var(--mono); font-size: 11px; color: var(--ink-dim); letter-spacing: .14em; text-transform: uppercase;
     margin-bottom: 28px;
   }
-  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
   .hero-name {
-    font-family: var(--display); font-weight: 400;
-    font-size: clamp(72px, 11vw, 200px); line-height: .88; letter-spacing: -.045em;
+    font-family: var(--display); font-weight: 400; color: var(--ink);
+    font-size: clamp(72px, 11vw, 200px); line-height: .88; letter-spacing: -.03em;
   }
   .hero-name .row { display: block; }
-  .hero-name .row2 { font-style: italic; font-weight: 400; }
-  .hero-name .row2 .pop-c { color: var(--cyan); font-style: normal; font-weight: 400; }
-  .hero-name .row2 .pop-p { color: var(--pink); }
-  .hero-name .blip {
-    display: inline-block; width: .22em; height: .22em; background: var(--lime);
-    border-radius: 50%; vertical-align: top; margin-left: .12em;
-    box-shadow: 0 0 30px var(--lime-glow);
-    animation: blink-blip 1.6s ease-in-out infinite;
-  }
-  @keyframes blink-blip { 50% { opacity: .3; } }
+  .hero-name .row2 { font-style: normal; }
 
   .hero-role {
     margin-top: 36px;
     font-family: var(--display); font-weight: 400; font-style: italic;
-    font-size: clamp(22px, 2.4vw, 32px); line-height: 1.3; letter-spacing: -.015em;
+    font-size: clamp(22px, 2.4vw, 30px); line-height: 1.35; letter-spacing: -.01em;
     color: var(--ink-dim); max-width: 740px; text-wrap: pretty;
   }
-  .hero-role b { color: var(--ink); font-style: normal; font-weight: 500; }
-  .hero-role .pop-c { color: var(--cyan); font-style: normal; }
-  .hero-role .pop-p { color: var(--pink); font-style: normal; }
-  .hero-role .pop-l { color: var(--lime); font-style: normal; }
+  /* Bold tags inside body prose render at normal weight */
+  .hero-role b, .a-prose p b, .ps-desc b, .a-lede b, .c-sub b {
+    font-weight: inherit; font-style: inherit; color: inherit;
+  }
 
   .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
   .btn {
@@ -225,9 +185,9 @@
     transition: all .22s; cursor: pointer;
   }
   .btn-pri { background: var(--ink); color: var(--bg); border: none; }
-  .btn-pri:hover { background: var(--cyan); color: #003a30; }
+  .btn-pri:hover { background: var(--accent); }
   .btn-out { background: transparent; color: var(--ink); border: 1px solid var(--line-strong); }
-  .btn-out:hover { border-color: var(--pink); color: var(--pink); background: color-mix(in oklab, var(--pink) 8%, transparent); }
+  .btn-out:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 
   /* ---------- Hero stat strip ---------- */
   .stat-strip {
@@ -246,12 +206,9 @@
     .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   }
   .stat .v {
-    font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1; letter-spacing: -.03em;
+    font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1; letter-spacing: -.02em;
+    color: var(--ink);
   }
-  .stat:nth-child(1) .v { color: var(--cyan); }
-  .stat:nth-child(2) .v { color: var(--pink); }
-  .stat:nth-child(3) .v { color: var(--lime); }
-  .stat:nth-child(4) .v { color: var(--ink); }
   .stat .l {
     font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim);
     letter-spacing: .14em; text-transform: uppercase;
@@ -271,13 +228,10 @@
   }
   .sec-num::before { content: ''; width: 22px; height: 1px; background: var(--ink-dim); }
   .sec-title {
-    font-family: var(--display); font-weight: 400;
-    font-size: clamp(40px, 5.4vw, 80px); line-height: .95; letter-spacing: -.035em;
+    font-family: var(--display); font-weight: 400; color: var(--ink);
+    font-size: clamp(40px, 5.4vw, 80px); line-height: .95; letter-spacing: -.025em;
   }
-  .sec-title em { font-style: italic; font-weight: 400; }
-  .sec-title .pop-c { color: var(--cyan); }
-  .sec-title .pop-p { color: var(--pink); }
-  .sec-title .pop-l { color: var(--lime); }
+  .sec-title em { font-style: normal; }
   .sec-aside {
     font-family: var(--mono); font-size: 12px; color: var(--ink-dim);
     letter-spacing: .04em; text-align: right;
@@ -292,13 +246,19 @@
 
   .a-lede {
     font-family: var(--display); font-weight: 400; font-style: italic;
-    font-size: clamp(28px, 3.4vw, 44px); line-height: 1.15; letter-spacing: -.02em;
+    font-size: clamp(28px, 3.4vw, 42px); line-height: 1.2; letter-spacing: -.015em;
     color: var(--ink); margin-bottom: 36px; text-wrap: pretty;
   }
-  .a-lede .pop-c { color: var(--cyan); font-style: normal; font-weight: 500; }
-  .a-prose p { color: var(--ink-dim); font-size: 16.5px; line-height: 1.75; margin-bottom: 18px; max-width: 64ch; }
-  .a-prose p b { color: var(--ink); font-weight: 500; }
-  .a-prose a.pop-link { color: var(--pink); border-bottom: 1px dashed var(--pink); }
+  .a-prose p {
+    font-family: var(--sans); font-weight: 400;
+    color: var(--ink-dim); font-size: 16.5px; line-height: 1.75;
+    margin-bottom: 18px; max-width: 64ch;
+  }
+  .a-prose a.pop-link {
+    color: var(--accent);
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+  }
+  .a-prose a.pop-link:hover { border-bottom-color: var(--accent); }
 
   .a-card {
     position: relative; border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
@@ -306,26 +266,25 @@
   }
   .a-photo {
     position: relative; aspect-ratio: 4/5; border-radius: 6px; overflow: hidden;
-    background: var(--pink);
+    background: var(--bg-3);
   }
   .a-photo img {
     width: 100%; height: 100%; object-fit: cover;
-    mix-blend-mode: luminosity; opacity: .92;
-  }
-  .a-photo::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 55%, color-mix(in oklab, var(--pink) 55%, transparent) 100%);
   }
   .a-photo .pin {
     position: absolute; top: 14px; left: 14px;
-    font-family: var(--mono); font-size: 10px; color: var(--bg); padding: 5px 10px; border-radius: 999px;
-    background: var(--lime); letter-spacing: .14em; text-transform: uppercase;
+    font-family: var(--mono); font-size: 10px; color: var(--ink);
+    padding: 5px 10px; border-radius: 999px;
+    background: var(--bg); border: 1px solid var(--line-strong);
+    letter-spacing: .14em; text-transform: uppercase;
   }
   .a-photo .cap {
     position: absolute; left: 14px; right: 14px; bottom: 14px;
     display: flex; justify-content: space-between;
-    font-family: var(--mono); font-size: 11px; color: var(--bg);
+    font-family: var(--mono); font-size: 11px; color: #fff;
     letter-spacing: .14em; text-transform: uppercase;
+    padding: 8px 12px; background: rgba(11, 29, 58, 0.55);
+    border-radius: 6px; backdrop-filter: blur(6px);
   }
   .a-card-meta {
     margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--line);
@@ -333,10 +292,8 @@
   }
   .a-card-meta div { display: flex; justify-content: space-between; padding: 6px 0; }
   .a-card-meta div b { color: var(--ink); font-weight: 500; }
-  .a-card-meta div .pop-c { color: var(--cyan); }
-  .a-card-meta div .pop-l { color: var(--lime); }
 
-  /* ---------- Projects (full-width strips) ---------- */
+  /* ---------- Projects ---------- */
   .work-list { display: flex; flex-direction: column; gap: 14px; }
 
   .pstrip {
@@ -344,7 +301,7 @@
     align-items: center;
     padding: 24px 28px;
     border: 1px solid var(--line); border-radius: 12px;
-    background: rgba(255,255,255,.015);
+    background: var(--bg-2);
     transition: all .3s cubic-bezier(.2,.7,.3,1);
     position: relative; overflow: hidden;
   }
@@ -356,46 +313,46 @@
     content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
     background: var(--ink-faint); transition: background .25s, width .25s;
   }
-  .pstrip:hover { border-color: var(--line-strong); background: rgba(255,255,255,.04); transform: translateX(4px); }
-  .pstrip:hover::before { width: 5px; }
-  .pstrip.c1:hover::before { background: var(--cyan); box-shadow: 0 0 24px var(--cyan-glow); }
-  .pstrip.c2:hover::before { background: var(--pink); box-shadow: 0 0 24px var(--pink-glow); }
-  .pstrip.c3:hover::before { background: var(--lime); box-shadow: 0 0 24px var(--lime-glow); }
+  .pstrip:hover { border-color: var(--line-strong); transform: translateX(4px); }
+  .pstrip:hover::before { background: var(--accent); width: 5px; }
 
   .ps-idx {
     font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: .14em;
   }
-  .pstrip.c1 .ps-idx { color: var(--cyan); }
-  .pstrip.c2 .ps-idx { color: var(--pink); }
-  .pstrip.c3 .ps-idx { color: var(--lime); }
 
   .ps-info { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
   .ps-title-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   .ps-title {
     font-family: var(--display); font-size: clamp(28px, 3vw, 42px); font-weight: 400;
-    letter-spacing: -.022em; line-height: 1.05;
+    letter-spacing: -.018em; line-height: 1.05; color: var(--ink);
   }
-  .ps-title em { font-style: italic; font-weight: 400; }
+  .ps-title em { font-style: normal; }
   .ps-pin {
     font-family: var(--mono); font-size: 9.5px; padding: 3px 9px; border-radius: 999px; letter-spacing: .14em;
     text-transform: uppercase;
-    background: color-mix(in oklab, var(--lime) 18%, transparent); color: var(--lime);
-    border: 1px solid color-mix(in oklab, var(--lime) 40%, transparent);
+    background: var(--accent-soft); color: var(--accent);
+    border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
   }
-  .ps-desc { color: var(--ink-dim); font-size: 14.5px; line-height: 1.6; max-width: 70ch; }
+  .ps-desc {
+    font-family: var(--sans); color: var(--ink-dim); font-size: 14.5px; line-height: 1.6; max-width: 70ch;
+  }
   .ps-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
   .ptag {
     font-family: var(--mono); font-size: 10px; padding: 3px 9px; border-radius: 999px; letter-spacing: .06em;
     color: var(--ink-dim); border: 1px solid var(--line);
   }
-  .ptag.c { color: var(--cyan); border-color: color-mix(in oklab, var(--cyan) 40%, transparent); }
-  .ptag.p { color: var(--pink); border-color: color-mix(in oklab, var(--pink) 40%, transparent); }
-  .ptag.l { color: var(--lime); border-color: color-mix(in oklab, var(--lime) 40%, transparent); }
 
   .ps-viz {
     position: relative; aspect-ratio: 16/10; border-radius: 8px; overflow: hidden;
     background: var(--bg-3); border: 1px solid var(--line);
   }
+  .ps-viz::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(135deg, transparent 40%, var(--accent-soft) 100%),
+      radial-gradient(circle at 30% 30%, var(--accent-soft), transparent 60%);
+  }
+
   .ps-go {
     font-family: var(--mono); font-size: 11px; color: var(--ink); letter-spacing: .04em;
     display: flex; align-items: center; justify-content: flex-end; gap: 8px;
@@ -407,78 +364,22 @@
     display: flex; align-items: center; justify-content: center;
     transition: all .25s;
   }
-  .pstrip.c1:hover .ps-go .arr { background: var(--cyan); color: #003a30; border-color: var(--cyan); }
-  .pstrip.c2:hover .ps-go .arr { background: var(--pink); color: var(--bg); border-color: var(--pink); }
-  .pstrip.c3:hover .ps-go .arr { background: var(--lime); color: #1a2400; border-color: var(--lime); }
-
-  /* Viz variants — concise iconography */
-  .viz-rag { background: radial-gradient(circle at 30% 50%, var(--pink), transparent 60%), radial-gradient(circle at 75% 50%, var(--cyan), transparent 60%), #1a0a15; }
-  .viz-rag::after { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 50%; height: 50%; border-radius: 50%; background: var(--lime); mix-blend-mode: difference; filter: blur(2px); }
-
-  .viz-agri { background: var(--lime); }
-  .viz-agri::before {
-    content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(circle 2px at 18% 28%, #0a3010, transparent),
-      radial-gradient(circle 2px at 38% 62%, #0a3010, transparent),
-      radial-gradient(circle 2px at 58% 32%, #0a3010, transparent),
-      radial-gradient(circle 2px at 78% 72%, #0a3010, transparent),
-      radial-gradient(circle 2px at 88% 26%, #0a3010, transparent),
-      radial-gradient(circle 2px at 28% 82%, #0a3010, transparent),
-      radial-gradient(circle 2px at 68% 50%, #0a3010, transparent);
-  }
-  .viz-agri::after { content: '🌱'; position: absolute; right: 12px; top: 8px; font-size: 22px; }
-
-  .viz-swasth { background: var(--pink); }
-  .viz-swasth::before {
-    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 40%; height: 40%; background: #1a0a12;
-    clip-path: polygon(40% 0, 60% 0, 60% 40%, 100% 40%, 100% 60%, 60% 60%, 60% 100%, 40% 100%, 40% 60%, 0 60%, 0 40%, 40% 40%);
-  }
-
-  .viz-crop { background: conic-gradient(from 0deg at 50% 50%, #15351c, #1d4b25, #0c2412, #2a6033, #15351c); }
-  .viz-crop::before {
-    content: ''; position: absolute; inset: 0;
-    background: repeating-linear-gradient(45deg, transparent 0, transparent 8px, rgba(0,0,0,.2) 8px, rgba(0,0,0,.2) 9px);
-  }
-  .viz-crop::after {
-    content: ''; position: absolute; top: 22%; right: 18%;
-    width: 22%; aspect-ratio: 1; background: var(--lime); border-radius: 50%;
-    filter: drop-shadow(0 0 14px var(--lime-glow));
-  }
-
-  .viz-cine { background: linear-gradient(180deg, #1a0820 0%, #08060a 100%); overflow: hidden; }
-  .viz-cine::before {
-    content: ''; position: absolute; inset: -10% 0;
-    background-image: repeating-linear-gradient(0deg, transparent 0, transparent 10px, var(--pink) 10px, var(--pink) 11px);
-    transform: perspective(300px) rotateX(60deg);
-    mask-image: linear-gradient(180deg, transparent 0%, black 30%, black 70%, transparent 100%);
-    opacity: .6;
-  }
-  .viz-cine::after {
-    content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
-    width: 60%; height: 3px; background: var(--cyan); box-shadow: 0 0 20px var(--cyan-glow);
-  }
-
-  .viz-spam { background: var(--orange); display: flex; align-items: center; justify-content: center; }
-  .viz-spam::before {
-    content: '✉'; font-family: var(--display); font-size: 90px; color: #1a0a08; line-height: 1; transform: rotate(-15deg);
-  }
-  .viz-spam::after {
-    content: ''; position: absolute; left: 12%; right: 12%; top: 50%; height: 3px;
-    background: #1a0a08; transform: rotate(-12deg);
-  }
+  .pstrip:hover .ps-go .arr { background: var(--accent); color: #fff; border-color: var(--accent); }
 
   .more-link {
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
     margin-top: 24px; padding: 22px 28px;
     border: 1px dashed var(--line); border-radius: 12px;
-    transition: all .25s;
+    transition: all .25s; background: var(--bg);
   }
-  .more-link:hover { border-color: var(--cyan); background: color-mix(in oklab, var(--cyan) 6%, transparent); }
-  .more-link .ml-txt { font-family: var(--display); font-size: 22px; }
-  .more-link .ml-txt em { font-style: italic; color: var(--ink-dim); }
-  .more-link .ml-meta { font-family: var(--mono); font-size: 11px; color: var(--cyan); letter-spacing: .14em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+  .more-link:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .more-link .ml-txt { font-family: var(--display); font-size: 22px; color: var(--ink); }
+  .more-link .ml-txt em { font-style: normal; }
+  .more-link .ml-meta {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: .14em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+  }
 
   /* ---------- Stack ---------- */
   .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -486,13 +387,11 @@
 
   .stack-card {
     border: 1px solid var(--line); border-radius: 10px; padding: 28px; position: relative; overflow: hidden;
-    background: linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+    background: var(--bg-2);
+    border-top: 3px solid var(--accent);
   }
-  .stack-card.c1 { border-top: 3px solid var(--cyan); }
-  .stack-card.c2 { border-top: 3px solid var(--pink); }
-  .stack-card.c3 { border-top: 3px solid var(--lime); }
-  .stack-card h3 { font-family: var(--display); font-weight: 400; font-size: 26px; letter-spacing: -.02em; margin-bottom: 4px; }
-  .stack-card h3 em { font-style: italic; }
+  .stack-card h3 { font-family: var(--display); font-weight: 400; font-size: 26px; letter-spacing: -.02em; margin-bottom: 4px; color: var(--ink); }
+  .stack-card h3 em { font-style: normal; }
   .stack-card .sub {
     font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); letter-spacing: .12em;
     text-transform: uppercase; margin-bottom: 24px;
@@ -506,11 +405,9 @@
   .stack-card li:last-child { border-bottom: none; }
   .stack-card li small {
     font-family: var(--mono); font-size: 10px; color: var(--ink-dim); letter-spacing: .12em;
-    text-transform: uppercase;
+    text-transform: uppercase; font-weight: 400;
   }
-  .stack-card.c1 li small.hot { color: var(--cyan); }
-  .stack-card.c2 li small.hot { color: var(--pink); }
-  .stack-card.c3 li small.hot { color: var(--lime); }
+  .stack-card li small.hot { color: var(--accent); }
 
   /* ---------- Contact ---------- */
   .contact-row {
@@ -519,12 +416,10 @@
   @media (max-width: 980px) { .contact-row { grid-template-columns: 1fr; gap: 32px; } }
 
   .c-mega {
-    font-family: var(--display); font-weight: 400;
-    font-size: clamp(56px, 7vw, 110px); line-height: .92; letter-spacing: -.045em;
+    font-family: var(--display); font-weight: 400; color: var(--ink);
+    font-size: clamp(56px, 7vw, 110px); line-height: .92; letter-spacing: -.03em;
   }
-  .c-mega em { font-style: italic; font-weight: 400; }
-  .c-mega .pop-c { color: var(--cyan); }
-  .c-mega .pop-p { color: var(--pink); }
+  .c-mega em { font-style: normal; }
   .c-sub {
     font-family: var(--display); font-style: italic; font-weight: 400;
     font-size: 22px; color: var(--ink-dim); margin-top: 22px; line-height: 1.4;
@@ -538,17 +433,17 @@
   }
   .c-link:hover { padding-left: 14px; }
   .c-link .ll { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); letter-spacing: .14em; text-transform: uppercase; min-width: 80px; }
-  .c-link .vv { font-family: var(--display); font-size: 22px; color: var(--ink); letter-spacing: -.015em; }
-  .c-link .vv em { font-style: italic; font-weight: 400; }
+  .c-link .vv { font-family: var(--display); font-size: 22px; color: var(--ink); letter-spacing: -.01em; }
+  .c-link .vv em { font-style: normal; }
   .c-link .arr { color: var(--ink-dim); font-family: var(--mono); font-size: 16px; transition: color .2s, transform .2s; }
-  .c-link:hover .arr { color: var(--cyan); transform: translateX(4px); }
+  .c-link:hover .arr { color: var(--accent); transform: translateX(4px); }
 
   .footer {
     padding: 56px 0 0; margin-top: 80px; border-top: 1px solid var(--line);
     display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
     font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: .08em;
   }
-  .footer em { font-family: var(--display); color: var(--cyan); font-style: italic; font-size: 13px; }
+  .footer em { font-family: var(--display); color: var(--accent); font-style: normal; font-size: 13px; }
 
   /* ---------- Reveal ---------- */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.16,.84,.3,1), transform .8s cubic-bezier(.16,.84,.3,1); }
@@ -561,22 +456,20 @@
 </style>
 </head>
 <body data-screen-label="Dossier">
-  <div class="bg-amb"></div>
   <div class="bg-grid"></div>
-  <div class="bg-grain"></div>
 
   <div class="shell">
     <!-- LEFT RAIL -->
     <aside class="rail">
       <div class="r-id">
-        <span class="r-mark"></span>
+        <span class="r-mark">A</span>
         <div class="r-name">Anthony Rodrigues<em>AI / ML Engineer</em></div>
       </div>
 
       <div class="r-status">
         <span class="pulse"></span>
         <div class="txt">
-          <b>Open to opportunities</b>
+          Open to opportunities
           <span>Mumbai · IST · 2026</span>
         </div>
       </div>
@@ -596,10 +489,10 @@
         <div class="r-label">/ vitals</div>
         <div class="r-meta">
           <div><span>Role</span><b>AI/ML Eng.</b></div>
-          <div><span>Studying</span><span class="pop-c">B.E. AI &amp; ML</span></div>
+          <div><span>Studying</span><b>B.E. AI &amp; ML</b></div>
           <div><span>At</span><b>SFIT, Mumbai</b></div>
-          <div><span>Currently</span><span class="pop-p">@ Keeper</span></div>
-          <div><span>Repos</span><span class="pop-l">29+</span></div>
+          <div><span>Currently</span><b>@ Keeper</b></div>
+          <div><span>Repos</span><b>29+</b></div>
         </div>
       </div>
 
@@ -614,7 +507,7 @@
       </div>
 
       <a href="#contact" class="r-cta">
-        <span>Let's <b>build</b> →</span>
+        <span>Let's build →</span>
         <span>✦</span>
       </a>
     </aside>
@@ -639,12 +532,10 @@
         <span class="hero-tag reveal">AI / ML Engineer · 2026 portfolio</span>
         <h1 class="hero-name reveal d1">
           <span class="row">Anthony</span>
-          <span class="row row2"><span class="pop-c">Rodrigues</span><span class="blip"></span></span>
+          <span class="row row2">Rodrigues</span>
         </h1>
         <p class="hero-role reveal d2">
-          I design and ship <b>end-to-end intelligent systems</b> — <span class="pop-c">multi-agent</span>
-          architectures, <span class="pop-p">RAG</span> pipelines, and <span class="pop-l">computer vision</span>
-          models. Currently building at <b>Keeper-Dating</b>; based in Mumbai.
+          I design and ship <b>end-to-end intelligent systems</b> — multi-agent architectures, RAG pipelines, and computer vision models. Currently building at <b>Keeper-Dating</b>; based in Mumbai.
         </p>
         <div class="hero-actions reveal d3">
           <a href="#work" class="btn btn-pri">See the work →</a>
@@ -664,14 +555,14 @@
         <div class="sec-head">
           <div class="sec-titlewrap">
             <span class="sec-num reveal">01 — identity</span>
-            <h2 class="sec-title reveal d1">A <em>builder</em>, <span class="pop-c">first.</span></h2>
+            <h2 class="sec-title reveal d1">A <em>builder</em>, first.</h2>
           </div>
           <span class="sec-aside reveal d2">the receipts are below ↓</span>
         </div>
 
         <div class="about-row">
           <div class="a-prose">
-            <p class="a-lede reveal">I'm not waiting for the future of AI to arrive — <span class="pop-c">I'm shipping it,</span> one repo at a time.</p>
+            <p class="a-lede reveal">I'm not waiting for the future of AI to arrive — I'm shipping it, one repo at a time.</p>
             <p class="reveal d1">
               I'm a <b>self-motivated AI/ML engineer</b> pursuing my Bachelor's in Artificial Intelligence
               &amp; Machine Learning at <b>St. Francis Institute of Technology, Mumbai</b>. Currently
@@ -702,8 +593,8 @@
             <div class="a-card-meta">
               <div><span>Education</span><b>B.E. AI &amp; ML</b></div>
               <div><span>Institute</span><b>SFIT, Mumbai</b></div>
-              <div><span>Now</span><span class="pop-c">@ Keeper-Dating</span></div>
-              <div><span>Status</span><span class="pop-l">● Available</span></div>
+              <div><span>Now</span><b>@ Keeper-Dating</b></div>
+              <div><span>Status</span><b>● Available</b></div>
             </div>
           </div>
         </div>
@@ -714,14 +605,14 @@
         <div class="sec-head">
           <div class="sec-titlewrap">
             <span class="sec-num reveal">02 — selected work</span>
-            <h2 class="sec-title reveal d1">The <em>build</em> <span class="pop-p">log.</span></h2>
+            <h2 class="sec-title reveal d1">The <em>build</em> log.</h2>
           </div>
           <span class="sec-aside reveal d2">click any row to read the code →</span>
         </div>
 
         <div class="work-list">
 
-          <a href="https://github.com/anthonyrodrigues443/RAG-Noah-Multi-Modal-LLM-Assistant" target="_blank" class="pstrip c1 reveal">
+          <a href="https://github.com/anthonyrodrigues443/RAG-Noah-Multi-Modal-LLM-Assistant" target="_blank" class="pstrip reveal">
             <div class="ps-idx">/ 01</div>
             <div class="ps-info">
               <div class="ps-title-row">
@@ -730,18 +621,18 @@
               </div>
               <p class="ps-desc">A multi-modal LLM assistant fusing RAG retrieval, general-purpose LLM reasoning, and real-time computer vision — engineered for smart-glasses integration. The closest thing to a wearable second brain I could build.</p>
               <div class="ps-tags">
-                <span class="ptag c">Python</span>
-                <span class="ptag c">LLMs</span>
-                <span class="ptag p">RAG</span>
-                <span class="ptag l">CV</span>
+                <span class="ptag">Python</span>
+                <span class="ptag">LLMs</span>
+                <span class="ptag">RAG</span>
+                <span class="ptag">CV</span>
                 <span class="ptag">Streamlit</span>
               </div>
             </div>
-            <div class="ps-viz viz-rag"></div>
+            <div class="ps-viz"></div>
             <div class="ps-go"><span>view</span><span class="arr">→</span></div>
           </a>
 
-          <a href="https://github.com/anthonyrodrigues443/AgriWise-Multi-Agent-Agricultural-Assistant-for-Crop-Advisory-and-Disease-Detection-System" target="_blank" class="pstrip c3 reveal d1">
+          <a href="https://github.com/anthonyrodrigues443/AgriWise-Multi-Agent-Agricultural-Assistant-for-Crop-Advisory-and-Disease-Detection-System" target="_blank" class="pstrip reveal d1">
             <div class="ps-idx">/ 02</div>
             <div class="ps-info">
               <div class="ps-title-row">
@@ -749,16 +640,16 @@
               </div>
               <p class="ps-desc">Multi-agent AI for crop advisory and plant disease detection — RAG over agricultural research papers plus CV-based diagnostics, all built for farmers.</p>
               <div class="ps-tags">
-                <span class="ptag l">Multi-Agent</span>
-                <span class="ptag c">RAG</span>
+                <span class="ptag">Multi-Agent</span>
+                <span class="ptag">RAG</span>
                 <span class="ptag">Agriculture</span>
               </div>
             </div>
-            <div class="ps-viz viz-agri"></div>
+            <div class="ps-viz"></div>
             <div class="ps-go"><span>view</span><span class="arr">→</span></div>
           </a>
 
-          <a href="https://github.com/anthonyrodrigues443/SwasthAI-Multi-Agent-Intelligent-Healthcare-Diagnostic-and-Advisory-System" target="_blank" class="pstrip c2 reveal d2">
+          <a href="https://github.com/anthonyrodrigues443/SwasthAI-Multi-Agent-Intelligent-Healthcare-Diagnostic-and-Advisory-System" target="_blank" class="pstrip reveal d2">
             <div class="ps-idx">/ 03</div>
             <div class="ps-info">
               <div class="ps-title-row">
@@ -766,16 +657,16 @@
               </div>
               <p class="ps-desc">Multi-agent healthcare diagnostic system — patient assessment, imaging analysis, and clinical decision support, all coordinated through specialized agents.</p>
               <div class="ps-tags">
-                <span class="ptag p">Multi-Agent</span>
+                <span class="ptag">Multi-Agent</span>
                 <span class="ptag">Healthcare</span>
-                <span class="ptag c">AI</span>
+                <span class="ptag">AI</span>
               </div>
             </div>
-            <div class="ps-viz viz-swasth"></div>
+            <div class="ps-viz"></div>
             <div class="ps-go"><span>view</span><span class="arr">→</span></div>
           </a>
 
-          <a href="https://github.com/anthonyrodrigues443/CropDoc_AI-Multi-Crop-Disease-Detection-System" target="_blank" class="pstrip c3 reveal">
+          <a href="https://github.com/anthonyrodrigues443/CropDoc_AI-Multi-Crop-Disease-Detection-System" target="_blank" class="pstrip reveal">
             <div class="ps-idx">/ 04</div>
             <div class="ps-info">
               <div class="ps-title-row">
@@ -783,16 +674,16 @@
               </div>
               <p class="ps-desc">Deep learning disease detection across wheat, rice, corn, potato and sugarcane — image-in, diagnosis-out, deployed end-to-end.</p>
               <div class="ps-tags">
-                <span class="ptag l">CNN</span>
-                <span class="ptag c">Computer Vision</span>
+                <span class="ptag">CNN</span>
+                <span class="ptag">Computer Vision</span>
                 <span class="ptag">Deep Learning</span>
               </div>
             </div>
-            <div class="ps-viz viz-crop"></div>
+            <div class="ps-viz"></div>
             <div class="ps-go"><span>view</span><span class="arr">→</span></div>
           </a>
 
-          <a href="https://github.com/anthonyrodrigues443/CineSemantics-Transformer-Powered-Movie-Recommendation-Engine" target="_blank" class="pstrip c2 reveal d1">
+          <a href="https://github.com/anthonyrodrigues443/CineSemantics-Transformer-Powered-Movie-Recommendation-Engine" target="_blank" class="pstrip reveal d1">
             <div class="ps-idx">/ 05</div>
             <div class="ps-info">
               <div class="ps-title-row">
@@ -800,16 +691,16 @@
               </div>
               <p class="ps-desc">Transformer-powered movie recommender using BERT/SBERT embeddings for content-based semantic similarity — surface films by meaning, not metadata.</p>
               <div class="ps-tags">
-                <span class="ptag p">BERT</span>
-                <span class="ptag c">NLP</span>
+                <span class="ptag">BERT</span>
+                <span class="ptag">NLP</span>
                 <span class="ptag">Transformers</span>
               </div>
             </div>
-            <div class="ps-viz viz-cine"></div>
+            <div class="ps-viz"></div>
             <div class="ps-go"><span>view</span><span class="arr">→</span></div>
           </a>
 
-          <a href="https://github.com/anthonyrodrigues443/Email-Spam-Classification" target="_blank" class="pstrip c1 reveal d2">
+          <a href="https://github.com/anthonyrodrigues443/Email-Spam-Classification" target="_blank" class="pstrip reveal d2">
             <div class="ps-idx">/ 06</div>
             <div class="ps-info">
               <div class="ps-title-row">
@@ -817,12 +708,12 @@
               </div>
               <p class="ps-desc">ML-powered Flask web app for email spam detection — deep learning combined with classical NLP, deployed for real-world use.</p>
               <div class="ps-tags">
-                <span class="ptag c">Flask</span>
-                <span class="ptag p">NLP</span>
-                <span class="ptag l">Deep Learning</span>
+                <span class="ptag">Flask</span>
+                <span class="ptag">NLP</span>
+                <span class="ptag">Deep Learning</span>
               </div>
             </div>
-            <div class="ps-viz viz-spam"></div>
+            <div class="ps-viz"></div>
             <div class="ps-go"><span>view</span><span class="arr">→</span></div>
           </a>
 
@@ -839,13 +730,13 @@
         <div class="sec-head">
           <div class="sec-titlewrap">
             <span class="sec-num reveal">03 — toolbox</span>
-            <h2 class="sec-title reveal d1">The <em>stack</em>, <span class="pop-l">no padding.</span></h2>
+            <h2 class="sec-title reveal d1">The <em>stack</em>, no padding.</h2>
           </div>
           <span class="sec-aside reveal d2">tools that ship, not tools that impress</span>
         </div>
 
         <div class="stack-grid">
-          <div class="stack-card c1 reveal">
+          <div class="stack-card reveal">
             <h3>AI <em>·</em> ML <em>·</em> Data</h3>
             <div class="sub">// the model layer</div>
             <ul>
@@ -858,7 +749,7 @@
               <li>OpenCV <small>proficient</small></li>
             </ul>
           </div>
-          <div class="stack-card c2 reveal d1">
+          <div class="stack-card reveal d1">
             <h3>Full <em>·</em> Stack</h3>
             <div class="sub">// the product layer</div>
             <ul>
@@ -870,7 +761,7 @@
               <li>REST · GraphQL <small>proficient</small></li>
             </ul>
           </div>
-          <div class="stack-card c3 reveal d2">
+          <div class="stack-card reveal d2">
             <h3>Tools <em>·</em> Cloud</h3>
             <div class="sub">// the ship layer</div>
             <ul>
@@ -890,7 +781,7 @@
         <div class="sec-head">
           <div class="sec-titlewrap">
             <span class="sec-num reveal">04 — let's talk</span>
-            <h2 class="sec-title reveal d1">Get in <em><span class="pop-p">touch.</span></em></h2>
+            <h2 class="sec-title reveal d1">Get in <em>touch.</em></h2>
           </div>
           <span class="sec-aside reveal d2">replies fast · usually within 24h</span>
         </div>
@@ -898,8 +789,8 @@
         <div class="contact-row">
           <div>
             <h3 class="c-mega reveal">
-              Let's <em class="pop-c">make</em><br/>
-              something <em class="pop-p">loud.</em>
+              Let's <em>make</em><br/>
+              something <em>loud.</em>
             </h3>
             <p class="c-sub reveal d1">Open to full-time AI/ML roles, research collaborations, and weird hardware experiments.</p>
           </div>
@@ -930,7 +821,7 @@
 
         <div class="footer">
           <span>© 2026 Anthony Rodrigues — all rights reserved.</span>
-          <span>designed loud · <em>Dossier v4</em> · Mumbai, IN</span>
+          <span>designed quiet · <em>Dossier v5</em> · Mumbai, IN</span>
         </div>
       </section>
     </main>
