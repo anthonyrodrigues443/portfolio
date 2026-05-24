@@ -6,7 +6,7 @@
 <title>Anthony Rodrigues — Dossier</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
     --bg: #0a0a0c;
@@ -24,8 +24,8 @@
     --cyan-glow: rgba(0, 255, 208, 0.4);
     --pink-glow: rgba(255, 61, 138, 0.4);
     --lime-glow: rgba(212, 255, 69, 0.4);
-    --sans: 'DM Sans', system-ui, sans-serif;
-    --display: 'Fraunces', 'Times New Roman', serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --display: 'Instrument Serif', 'Times New Roman', serif;
     --mono: 'JetBrains Mono', monospace;
 
     --rail: 320px;
@@ -89,11 +89,11 @@
   .r-mark::after {
     content: 'A'; position: absolute; inset: 4px; border-radius: 50%; background: var(--bg);
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--display); font-style: italic; font-weight: 500; color: var(--ink); font-size: 18px;
+    font-family: var(--display); font-style: italic; font-weight: 400; color: var(--ink); font-size: 18px;
   }
   @keyframes rot { to { transform: rotate(360deg); } }
   .r-name { font-family: var(--display); font-size: 20px; line-height: 1.1; letter-spacing: -.01em; }
-  .r-name em { font-style: italic; font-weight: 300; color: var(--ink-dim); display: block; font-size: 13px; margin-top: 2px; }
+  .r-name em { font-style: italic; font-weight: 400; color: var(--ink-dim); display: block; font-size: 13px; margin-top: 2px; }
 
   .r-status {
     padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px;
@@ -196,7 +196,7 @@
     font-size: clamp(72px, 11vw, 200px); line-height: .88; letter-spacing: -.045em;
   }
   .hero-name .row { display: block; }
-  .hero-name .row2 { font-style: italic; font-weight: 300; }
+  .hero-name .row2 { font-style: italic; font-weight: 400; }
   .hero-name .row2 .pop-c { color: var(--cyan); font-style: normal; font-weight: 400; }
   .hero-name .row2 .pop-p { color: var(--pink); }
   .hero-name .blip {
@@ -274,7 +274,7 @@
     font-family: var(--display); font-weight: 400;
     font-size: clamp(40px, 5.4vw, 80px); line-height: .95; letter-spacing: -.035em;
   }
-  .sec-title em { font-style: italic; font-weight: 300; }
+  .sec-title em { font-style: italic; font-weight: 400; }
   .sec-title .pop-c { color: var(--cyan); }
   .sec-title .pop-p { color: var(--pink); }
   .sec-title .pop-l { color: var(--lime); }
@@ -291,7 +291,7 @@
   @media (max-width: 980px) { .about-row { grid-template-columns: 1fr; } }
 
   .a-lede {
-    font-family: var(--display); font-weight: 300; font-style: italic;
+    font-family: var(--display); font-weight: 400; font-style: italic;
     font-size: clamp(28px, 3.4vw, 44px); line-height: 1.15; letter-spacing: -.02em;
     color: var(--ink); margin-bottom: 36px; text-wrap: pretty;
   }
@@ -375,7 +375,7 @@
     font-family: var(--display); font-size: clamp(28px, 3vw, 42px); font-weight: 400;
     letter-spacing: -.022em; line-height: 1.05;
   }
-  .ps-title em { font-style: italic; font-weight: 300; }
+  .ps-title em { font-style: italic; font-weight: 400; }
   .ps-pin {
     font-family: var(--mono); font-size: 9.5px; padding: 3px 9px; border-radius: 999px; letter-spacing: .14em;
     text-transform: uppercase;
@@ -522,11 +522,11 @@
     font-family: var(--display); font-weight: 400;
     font-size: clamp(56px, 7vw, 110px); line-height: .92; letter-spacing: -.045em;
   }
-  .c-mega em { font-style: italic; font-weight: 300; }
+  .c-mega em { font-style: italic; font-weight: 400; }
   .c-mega .pop-c { color: var(--cyan); }
   .c-mega .pop-p { color: var(--pink); }
   .c-sub {
-    font-family: var(--display); font-style: italic; font-weight: 300;
+    font-family: var(--display); font-style: italic; font-weight: 400;
     font-size: 22px; color: var(--ink-dim); margin-top: 22px; line-height: 1.4;
   }
 
@@ -539,7 +539,7 @@
   .c-link:hover { padding-left: 14px; }
   .c-link .ll { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); letter-spacing: .14em; text-transform: uppercase; min-width: 80px; }
   .c-link .vv { font-family: var(--display); font-size: 22px; color: var(--ink); letter-spacing: -.015em; }
-  .c-link .vv em { font-style: italic; font-weight: 300; }
+  .c-link .vv em { font-style: italic; font-weight: 400; }
   .c-link .arr { color: var(--ink-dim); font-family: var(--mono); font-size: 16px; transition: color .2s, transform .2s; }
   .c-link:hover .arr { color: var(--cyan); transform: translateX(4px); }
 
