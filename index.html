@@ -628,10 +628,10 @@
                 <h3 class="ps-title">RAG Noah</h3>
                 <span class="ps-pin">flagship · live</span>
               </div>
-              <p class="ps-desc">A multi-modal LLM assistant fusing RAG retrieval, general-purpose LLM reasoning, and real-time computer vision — engineered for smart-glasses integration. The closest thing to a wearable second brain I could build.</p>
+              <p class="ps-desc">A multi-modal RAG assistant with document Q&amp;A and real-time computer vision — object detection and hand tracking — fronted by a multi-LLM pipeline via GROQ (Gemma for query refinement, LLaMA 70B for generation). Live Streamlit demo.</p>
               <div class="ps-tags">
-                <span class="ptag">Python</span>
-                <span class="ptag">LLMs</span>
+                <span class="ptag">LangChain</span>
+                <span class="ptag">GROQ</span>
                 <span class="ptag">RAG</span>
                 <span class="ptag">CV</span>
                 <span class="ptag">Streamlit</span>
@@ -696,10 +696,11 @@
               <div class="ps-title-row">
                 <h3 class="ps-title">Legal Contract Analyzer</h3>
               </div>
-              <p class="ps-desc">NER-based clause extraction and risk scoring from legal contracts using transformer models on the CUAD dataset — turning 40-page contracts into a structured risk summary.</p>
+              <p class="ps-desc">Multi-label clause classification on real commercial contracts (CUAD). A LightGBM + LR blend on TF-IDF beats published RoBERTa-large by 6.6 macro-F1 points (0.716 vs 0.650) at 12ms per contract — proving full-document access matters more than model capacity.</p>
               <div class="ps-tags">
-                <span class="ptag">NER</span>
-                <span class="ptag">Transformers</span>
+                <span class="ptag">LightGBM</span>
+                <span class="ptag">TF-IDF</span>
+                <span class="ptag">CUAD</span>
                 <span class="ptag">Legal AI</span>
               </div>
             </div>
@@ -755,10 +756,11 @@
               <div class="ps-title-row">
                 <h3 class="ps-title">Deepfake Audio Detector</h3>
               </div>
-              <p class="ps-desc">Detecting AI-generated speech using CNN spectrogram analysis and forensic audio features — built for the rising tide of synthetic voice fraud and clone-based attacks.</p>
+              <p class="ps-desc">Synthetic-speech detection benchmarked against the ASVspoof literature. A mel-CNN with Wav2Vec2 embeddings and classical forensic features (MFCC, jitter, shimmer) reaches 2.41% EER in-domain, with a 15.2ms p50 production pipeline shipped behind a Streamlit UI.</p>
               <div class="ps-tags">
-                <span class="ptag">CNN</span>
-                <span class="ptag">Audio</span>
+                <span class="ptag">Wav2Vec2</span>
+                <span class="ptag">mel-CNN</span>
+                <span class="ptag">ASVspoof</span>
                 <span class="ptag">AI Safety</span>
               </div>
             </div>
@@ -782,11 +784,12 @@
                 <h3 class="ps-title">Autonomous ML Agent</h3>
                 <span class="ps-pin wip">currently building · wip</span>
               </div>
-              <p class="ps-desc">A multi-agent LLM system that takes a Kaggle dataset URL and produces a working Jupyter notebook with EDA, model training, and a final report — the full ML iteration loop, automated.</p>
+              <p class="ps-desc">An autonomous research-aware iteration agent for ML models, vision models, and LLM prompts in production. Pulls its own training data and context from your DBs, files, and docs via MCP; proposes literature-grounded experiments; optimizes for the best model you can actually afford to serve.</p>
               <div class="ps-tags">
                 <span class="ptag">Multi-Agent</span>
-                <span class="ptag">LLMs</span>
-                <span class="ptag">AutoML</span>
+                <span class="ptag">MCP</span>
+                <span class="ptag">Cost-Aware</span>
+                <span class="ptag">Local-First</span>
               </div>
             </div>
             <div class="ps-viz" aria-hidden="true">
@@ -809,7 +812,7 @@
         </div>
 
         <a href="https://github.com/anthonyrodrigues443?tab=repositories" target="_blank" class="more-link reveal">
-          <span class="ml-txt">See all <em>29 repositories</em> on GitHub</span>
+          <span class="ml-txt">See all <em>31 repositories</em> on GitHub</span>
           <span class="ml-meta">browse archive →</span>
         </a>
       </section>
